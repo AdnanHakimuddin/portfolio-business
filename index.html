@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Adnan Hakimuddin — I find what's costing you customers. Then I fix it.</title>
+<meta name="description" content="Web developer for local businesses. I diagnose what's broken on your website — dead buttons, broken forms, slow pages — and fix what's quietly costing you customers." />
+
+<!-- ============================================================
+  EDIT THESE BEFORE PUBLISHING — search for each token:
+    Adnan Hakimuddin        your full name
+    adnanhakimuddin12@gmail.com       e.g. you@example.com  (appears in 3 places)
+    +92 332 8265515       optional, in footer
+    https://www.linkedin.com/in/adnanhakimuddin/    optional link, in footer
+============================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#15222C;
+  --ink-soft:#41525F;
+  --paper:#F2F4F3;
+  --card:#FFFFFF;
+  --line:#D7DDDA;
+  --broken:#D6403F;
+  --broken-bg:#FBEAEA;
+  --fixed:#1F8A5B;
+  --fixed-bg:#E4F3EB;
+  --marker:#FFC531;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Instrument Sans",system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--marker);color:var(--ink)}
+a{color:inherit}
+img{max-width:100%}
+.mono{font-family:"JetBrains Mono",monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* emphasis mark */
+.mark{
+  text-decoration:underline;
+  text-decoration-color:var(--marker);
+  text-decoration-thickness:.14em;
+  text-underline-offset:.13em;
+  text-decoration-skip-ink:none;
+}
+.cta-box h2 .mark{color:var(--marker);text-decoration:none}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:"Manrope",sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:-.01em;text-decoration:none}
+.brand .dot{color:var(--broken)}
+.nav a.cta{
+  font-family:"JetBrains Mono",monospace;font-size:.8rem;font-weight:600;
+  text-decoration:none;background:var(--ink);color:var(--paper);
+  padding:.55em 1.1em;border-radius:999px;transition:transform .15s ease,background .15s ease;
+}
+.nav a.cta:hover{background:#000;transform:translateY(-1px)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--marker);outline-offset:3px;border-radius:4px}
+
+/* ---------- hero ---------- */
+.hero{padding:72px 0 88px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.kicker{color:var(--broken);font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:.6em}
+.kicker::before{content:"";width:34px;height:2px;background:var(--broken);display:inline-block}
+h1{
+  font-family:"Manrope",sans-serif;
+  font-weight:850;font-stretch:110%;
+  font-size:clamp(2.4rem,4.6vw,3.9rem);
+  line-height:1.1;letter-spacing:-.025em;
+  margin-bottom:22px;
+}
+.hero p.lede{font-size:1.15rem;color:var(--ink-soft);max-width:34em;margin-bottom:32px}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-block;text-decoration:none;font-weight:600;
+  padding:.85em 1.6em;border-radius:999px;font-size:.98rem;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--ink);color:var(--paper);box-shadow:0 6px 18px rgba(21,34,44,.25)}
+.btn.ghost{border:1.5px solid var(--ink);color:var(--ink)}
+
+/* ---------- audit demo (signature) ---------- */
+.demo{position:relative}
+.browser{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:0 24px 60px -24px rgba(21,34,44,.35);overflow:hidden;
+}
+.browser-bar{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  border-bottom:1px solid var(--line);background:#FAFBFA;
+}
+.browser-bar span{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.browser-bar .url{
+  flex:1;margin-left:8px;background:var(--paper);border-radius:6px;
+  font-family:"JetBrains Mono",monospace;font-size:.68rem;color:var(--ink-soft);
+  padding:4px 10px;text-transform:none;letter-spacing:0;
+}
+.site{padding:22px;display:flex;flex-direction:column;gap:14px;min-height:330px}
+.site .biz{font-family:"Manrope",sans-serif;font-weight:800;font-size:1.05rem}
+.site .tagline{font-size:.85rem;color:var(--ink-soft)}
+.chunk{position:relative;border:1.5px dashed transparent;border-radius:10px;padding:12px 14px;transition:border-color .3s,background .3s}
+.chunk .label{font-size:.72rem;color:var(--ink-soft);margin-bottom:6px}
+.fake-btn{
+  display:inline-block;font-size:.85rem;font-weight:600;padding:.5em 1.1em;
+  border-radius:8px;background:var(--ink);color:#fff;
+}
+.raw-code{font-family:"JetBrains Mono",monospace;font-size:.85rem;color:var(--broken);text-transform:none;letter-spacing:0}
+.form-mock{display:flex;flex-direction:column;gap:8px}
+.form-mock .field{height:30px;border:1px solid var(--line);border-radius:6px;background:#FCFDFC}
+.form-mock .send{align-self:flex-start}
+
+/* annotation pins */
+.pin{
+  position:absolute;right:-10px;top:-12px;z-index:5;
+  font-family:"JetBrains Mono",monospace;font-size:.66rem;font-weight:600;letter-spacing:.02em;text-transform:none;
+  padding:.45em .8em;border-radius:8px;max-width:230px;
+  box-shadow:0 8px 20px -8px rgba(21,34,44,.35);
+  transition:opacity .35s ease, transform .35s ease;
+}
+.pin.bad{background:var(--broken);color:#fff}
+.pin.good{background:var(--fixed);color:#fff}
+.demo[data-state="broken"] .chunk{border-color:var(--broken);background:var(--broken-bg)}
+.demo[data-state="fixed"]  .chunk{border-color:var(--fixed);background:var(--fixed-bg)}
+.demo .pin.good, .demo .fixed-view{opacity:0;transform:translateY(6px);pointer-events:none;position:absolute;inset:auto}
+.demo[data-state="fixed"] .pin.bad, .demo[data-state="fixed"] .broken-view{opacity:0;transform:translateY(-6px);pointer-events:none;position:absolute}
+.demo[data-state="fixed"] .pin.good{opacity:1;transform:none;pointer-events:auto;position:absolute;right:-10px;top:-12px}
+.demo[data-state="fixed"] .fixed-view{opacity:1;transform:none;pointer-events:auto;position:static}
+.broken-view,.fixed-view{transition:opacity .35s ease}
+
+/* toggle */
+.toggle-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px}
+.toggle-row .mono{font-size:.72rem;color:var(--ink-soft)}
+.switch{
+  width:64px;height:32px;border-radius:999px;border:none;cursor:pointer;
+  background:var(--broken);position:relative;transition:background .3s;
+}
+.switch::after{
+  content:"";position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;
+  background:#fff;transition:transform .3s cubic-bezier(.6,.05,.3,1.4);
+}
+.demo[data-state="fixed"] .switch{background:var(--fixed)}
+.demo[data-state="fixed"] .switch::after{transform:translateX(32px)}
+.verdict{
+  text-align:center;margin-top:12px;font-family:"JetBrains Mono",monospace;
+  font-size:.75rem;text-transform:none;letter-spacing:.02em;
+}
+.demo[data-state="broken"] .verdict{color:var(--broken)}
+.demo[data-state="fixed"] .verdict{color:var(--fixed)}
+
+/* ---------- sections ---------- */
+section{padding:84px 0}
+.sec-head{max-width:620px;margin-bottom:48px}
+.sec-head .mono{color:var(--broken);margin-bottom:12px;display:block}
+h2{
+  font-family:"Manrope",sans-serif;font-weight:800;
+  font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;letter-spacing:-.015em;
+}
+.sec-head p{margin-top:14px;color:var(--ink-soft)}
+
+/* sound familiar cards */
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pain{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px;display:flex;flex-direction:column;gap:14px;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.pain:hover{transform:translateY(-4px);box-shadow:0 18px 40px -20px rgba(21,34,44,.3)}
+.pain q{
+  font-size:1.06rem;font-weight:600;line-height:1.4;quotes:"\201C" "\201D";
+}
+.pain q::before{color:var(--broken)}
+.pain q::after{color:var(--broken)}
+.pain .ans{color:var(--ink-soft);font-size:.95rem}
+.pain .tag{align-self:flex-start;background:var(--broken-bg);color:var(--broken);border-radius:6px;padding:.35em .7em;font-weight:600}
+
+/* skills */
+.skill-list{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;border-top:1px solid var(--line)}
+.skill{
+  display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+  padding:26px 0;border-bottom:1px solid var(--line);
+}
+.skill .ic{
+  width:44px;height:44px;border-radius:12px;background:var(--ink);color:var(--marker);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.skill .ic svg{width:22px;height:22px}
+.skill h3{font-family:"Manrope",sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px}
+.skill p{color:var(--ink-soft);font-size:.95rem}
+
+/* process — genuine sequence, numbering earned */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step}
+.step{
+  background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:30px 26px;
+  position:relative;counter-increment:step;overflow:hidden;
+}
+.step::before{
+  content:counter(step,decimal-leading-zero);
+  font-family:"Manrope",sans-serif;font-weight:800;font-size:4.4rem;line-height:1;
+  position:absolute;right:14px;bottom:-8px;color:rgba(255,255,255,.08);
+}
+.step .mono{color:var(--marker);margin-bottom:10px;display:block}
+.step h3{font-family:"Manrope",sans-serif;font-weight:700;font-size:1.15rem;margin-bottom:10px}
+.step p{color:#B9C4CC;font-size:.94rem}
+
+/* recent finds */
+.finds{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.find{
+  display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;
+  padding:18px 24px;border-bottom:1px solid var(--line);
+}
+.find:last-child{border-bottom:none}
+.find .sev{width:10px;height:10px;border-radius:50%;background:var(--broken);flex-shrink:0}
+.find .what{font-size:.98rem}
+.find .what strong{font-weight:650}
+.find .time{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--ink-soft);text-transform:none;white-space:nowrap}
+
+/* CTA */
+.cta-sec{padding:96px 0 110px}
+.cta-box{
+  background:var(--ink);color:var(--paper);border-radius:22px;
+  padding:clamp(40px,6vw,72px);text-align:center;position:relative;overflow:hidden;
+}
+.cta-box::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(600px 300px at 85% -20%, rgba(255,197,49,.18), transparent 70%);
+}
+.cta-box h2{color:#fff;max-width:16em;margin:0 auto 18px;position:relative}
+.cta-box p{color:#B9C4CC;max-width:34em;margin:0 auto 34px;position:relative}
+.cta-box .btn-row{justify-content:center;position:relative}
+.cta-box .btn.primary{background:var(--marker);color:var(--ink);box-shadow:0 6px 24px rgba(255,197,49,.3)}
+.cta-box .btn.ghost{border-color:#5A6B77;color:#fff}
+.email-line{margin-top:26px;position:relative}
+.email-line a{color:#fff;font-family:"JetBrains Mono",monospace;font-size:.85rem;text-transform:none;letter-spacing:.02em}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:28px 0 40px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--ink-soft);font-size:.85rem}
+.foot a{color:var(--ink-soft)}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+@media (max-width:940px){
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .pain-grid,.steps{grid-template-columns:1fr}
+  .skill-list{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .hero{padding:48px 0 64px}
+  section{padding:60px 0}
+  .pin{position:static;display:inline-block;margin-top:10px;max-width:100%}
+  .demo[data-state="fixed"] .pin.good{position:static}
+  .find{grid-template-columns:auto 1fr}
+  .find .time{grid-column:2}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">Adnan Hakimuddin<span class="dot">.</span></a>
+    <a class="cta" href="mailto:adnanhakimuddin12@gmail.com">Contact me</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker mono">Web developer for local businesses</p>
+      <h1>I find what's costing you customers. <span class="mark">Then I fix it.</span></h1>
+      <p class="lede">Most business owners don't need a lecture about their website. They need someone who spots the broken form, the dead call button, and the page that loads too slowly — before another customer gives up and calls a competitor. That's what I do. You don't have to explain everything; chances are, I already know what you need.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="mailto:adnanhakimuddin12@gmail.com">Get a free site check</a>
+        <a class="btn ghost" href="#how">See how I work</a>
+      </div>
+    </div>
+
+    <!-- signature: live audit demo -->
+    <div class="demo" data-state="broken" id="demo">
+      <div class="browser">
+        <div class="browser-bar">
+          <span></span><span></span><span></span>
+          <div class="url">yourbusiness.com — as your customers see it</div>
+        </div>
+        <div class="site">
+          <div>
+            <div class="biz">Smith Family Services</div>
+            <div class="tagline">Trusted since 1985 · Serving the whole metro area</div>
+          </div>
+
+          <div class="chunk">
+            <div class="label mono">Call-to-action button</div>
+            <span class="broken-view"><span class="fake-btn">Request Service</span></span>
+            <span class="fixed-view"><a class="fake-btn" href="#0" onclick="return false">Call (555) 014-2200</a></span>
+            <span class="pin bad">tel: link is empty — tapping does nothing</span>
+            <span class="pin good">one-tap call, tracked &amp; tested</span>
+          </div>
+
+          <div class="chunk">
+            <div class="label mono">Contact form</div>
+            <span class="broken-view raw-code">[formidable id=5]</span>
+            <span class="fixed-view form-mock">
+              <span class="field"></span><span class="field"></span>
+              <span class="fake-btn send">Send request</span>
+            </span>
+            <span class="pin bad">form is broken — raw code shows instead</span>
+            <span class="pin good">working form, spam-protected</span>
+          </div>
+
+          <div class="chunk">
+            <div class="label mono">About the business</div>
+            <span class="broken-view" style="font-size:.9rem">Over 50 years of experience…</span>
+            <span class="fixed-view" style="font-size:.9rem">Family owned since 1985 — <strong>over 40 years</strong> serving the metro.</span>
+            <span class="pin bad">copy contradicts the footer</span>
+            <span class="pin good">one consistent, stronger story</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="toggle-row">
+        <span class="mono">Broken</span>
+        <button class="switch" id="fixSwitch" role="switch" aria-checked="false" aria-label="Toggle between broken and fixed website"></button>
+        <span class="mono">Fixed</span>
+      </div>
+      <div class="verdict" id="verdict">3 issues found · each one is a lost customer</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SOUND FAMILIAR ================= -->
+<section id="problems">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="mono">Sound familiar?</span>
+      <h2>You don't have to explain the problem. I've probably already seen it.</h2>
+      <p>These are the three things business owners tell me most often — and what's usually really going on underneath.</p>
+    </div>
+    <div class="pain-grid">
+      <article class="pain reveal">
+        <q>My site looks fine, but the phone barely rings.</q>
+        <p class="ans">"Looks fine" and "converts visitors" are different things. Usually the call buttons, forms, or page speed are quietly failing — and every failure sends a ready-to-buy customer to the next result on Google.</p>
+        <span class="tag mono">Conversion problem</span>
+      </article>
+      <article class="pain reveal">
+        <q>We paid for the website years ago and nobody's touched it since.</q>
+        <p class="ans">Old plugins break, forms stop sending, and Google slowly stops trusting the site. I audit what's aged badly, fix what's broken, and set it up so it doesn't rot again.</p>
+        <span class="tag mono">Maintenance debt</span>
+      </article>
+      <article class="pain reveal">
+        <q>The big franchises keep showing up above us on Google.</q>
+        <p class="ans">They're not better at your trade — they're better at technical SEO. Proper local-business markup, fast mobile pages, and service-area pages put an independent business back in the fight.</p>
+        <span class="tag mono">Local SEO gap</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="mono">Skills &amp; experience</span>
+      <h2>The toolbox — always in service of your problem, never for its own sake.</h2>
+    </div>
+    <div class="skill-list">
+      <div class="skill reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+        <div><h3>Website audits &amp; diagnosis</h3><p>Broken forms, dead links, mismatched copy, security risks — found fast, explained in plain English, with a report you can act on.</p></div>
+      </div>
+      <div class="skill reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+        <div><h3>Speed &amp; Core Web Vitals</h3><p>Your customers are on phones, often in a hurry. I make pages load fast enough that they never think about it — which is exactly the point.</p></div>
+      </div>
+      <div class="skill reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10m8 10V4m8 16v-7"/></svg></div>
+        <div><h3>Local SEO that wins calls</h3><p>Structured data, service-area pages, and review integration — the unglamorous work that decides who shows up when someone searches "near me".</p></div>
+      </div>
+      <div class="skill reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-5 6 5 6M16 6l5 6-5 6"/></svg></div>
+        <div><h3>Modern rebuilds</h3><p>From fragile plugin-stacked WordPress to fast, stable builds — Next.js, Astro, or WordPress done properly. Rankings preserved with careful redirects.</p></div>
+      </div>
+      <div class="skill reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 8 9 6 9-6"/></svg></div>
+        <div><h3>Copy that sells your story</h3><p>A 40-year family business shouldn't sound like a template. I rewrite pages so your real advantage — trust — is impossible to miss.</p></div>
+      </div>
+      <div class="skill reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div>
+        <div><h3>Tracking &amp; proof</h3><p>Call tracking and analytics wired in from day one — so you can see, in numbers, exactly what the website earns you every month.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="mono">How I work</span>
+      <h2>Three steps. No jargon. No surprises on the invoice.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="mono">Diagnose</span>
+        <h3>I look before I quote</h3>
+        <p>A free check of your live site — the same way your customers see it. You get a plain-English list of what's broken and what it's costing you.</p>
+      </div>
+      <div class="step reveal">
+        <span class="mono">Prescribe</span>
+        <h3>Options, not ultimatums</h3>
+        <p>Quick fixes, a cleanup, or a full rebuild — priced separately, so you choose the level that fits your budget. Fixed price, in writing.</p>
+      </div>
+      <div class="step reveal">
+        <span class="mono">Repair</span>
+        <h3>Fix, measure, prove</h3>
+        <p>I do the work, keep your Google rankings safe, and set up tracking so you can watch calls and enquiries — not just take my word for it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECENT FINDS ================= -->
+<section id="finds">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="mono">Recent finds</span>
+      <h2>Real issues, found on real business websites.</h2>
+      <p>A sample of what turns up when I audit local-business sites. If yours has one of these, you're losing customers right now.</p>
+    </div>
+    <div class="finds reveal">
+      <div class="find"><span class="sev"></span><span class="what">Contact form replaced by raw plugin code — <strong>customers saw "[formidable id=5]" instead of a form</strong></span><span class="time mono">found in 4 min</span></div>
+      <div class="find"><span class="sev"></span><span class="what">"Request Service" button linked to an <strong>empty phone number</strong> — tapping it did nothing</span><span class="time mono">found in 6 min</span></div>
+      <div class="find"><span class="sev"></span><span class="what">Homepage claimed "50 years of experience" while the footer said "since 1960" — <strong>underselling by 16 years</strong></span><span class="time mono">found in 9 min</span></div>
+      <div class="find"><span class="sev"></span><span class="what">Trust badges paired with the <strong>wrong descriptions</strong> — the 24/7 text sat under "Free estimates"</span><span class="time mono">found in 11 min</span></div>
+      <div class="find"><span class="sev"></span><span class="what">No local-business structured data — <strong>invisible to Google's map results</strong> for "near me" searches</span><span class="time mono">found in 14 min</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta-sec">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>You don't have to explain it all. <span class="mark">Just show me your website.</span></h2>
+      <p>Send me your web address. Within a few days you'll get a free, honest look at what's holding it back — no obligation, no jargon, and it's yours to keep even if we never work together.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="mailto:adnanhakimuddin12@gmail.com?subject=Free%20site%20check&body=Hi%2C%20my%20website%20is%3A%20">Send me your site</a>
+        <a class="btn ghost" href="mailto:adnanhakimuddin12@gmail.com">Just say hello</a>
+      </div>
+      <p class="email-line"><a href="mailto:adnanhakimuddin12@gmail.com">adnanhakimuddin12@gmail.com</a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="yr"></span> Adnan Hakimuddin — Web developer</span>
+    <span><a href="mailto:adnanhakimuddin12@gmail.com">adnanhakimuddin12@gmail.com</a> · <a href="tel:+92 332 8265515">+92 332 8265515</a> · <a href="https://www.linkedin.com/in/adnanhakimuddin/">LinkedIn</a></span>
+  </div>
+</footer>
+
+<script>
+// year
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// broken/fixed toggle
+const demo = document.getElementById('demo');
+const sw = document.getElementById('fixSwitch');
+const verdict = document.getElementById('verdict');
+sw.addEventListener('click', () => {
+  const fixed = demo.dataset.state !== 'fixed';
+  demo.dataset.state = fixed ? 'fixed' : 'broken';
+  sw.setAttribute('aria-checked', fixed);
+  verdict.textContent = fixed
+    ? '3 issues fixed · every visitor can now reach you'
+    : '3 issues found · each one is a lost customer';
+});
+
+// scroll reveal (respects reduced motion via CSS)
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
